@@ -6,6 +6,7 @@ let monthlyChart = null;
 
 // Initialize app
 document.addEventListener('DOMContentLoaded', () => {
+    loadFromLocalStorage();
     initializeApp();
     setupEventListeners();
 });
@@ -13,6 +14,29 @@ document.addEventListener('DOMContentLoaded', () => {
 function initializeApp() {
     renderCalendar();
     renderMonthlyChart();
+}
+
+// LocalStorage functions
+function saveToLocalStorage() {
+    try {
+        localStorage.setItem('tasksData', JSON.stringify(tasksData));
+        console.log('Data saved to localStorage');
+    } catch (error) {
+        console.error('Error saving to localStorage:', error);
+    }
+}
+
+function loadFromLocalStorage() {
+    try {
+        const saved = localStorage.getItem('tasksData');
+        if (saved) {
+            tasksData = JSON.parse(saved);
+            console.log('Data loaded from localStorage');
+        }
+    } catch (error) {
+        console.error('Error loading from localStorage:', error);
+        tasksData = {};
+    }
 }
 
 function setupEventListeners() {
@@ -248,6 +272,7 @@ function addTask() {
     input.value = '';
     input.focus();
     
+    saveToLocalStorage(); // Save after adding
     renderTaskList();
     updateModalProgress();
     renderCalendar();
@@ -258,6 +283,7 @@ function toggleTask(index) {
     const tasks = tasksData[selectedDate];
     tasks[index].completed = !tasks[index].completed;
     
+    saveToLocalStorage(); // Save after toggling
     renderTaskList();
     updateModalProgress();
     renderCalendar();
@@ -271,6 +297,7 @@ function deleteTask(index) {
         delete tasksData[selectedDate];
     }
     
+    saveToLocalStorage(); // Save after deleting
     renderTaskList();
     updateModalProgress();
     renderCalendar();
@@ -412,6 +439,7 @@ function importData() {
                     });
                 });
                 
+                saveToLocalStorage(); // Save imported data
                 renderCalendar();
                 renderMonthlyChart();
                 alert('Data imported successfully!');

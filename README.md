@@ -7,7 +7,8 @@ A minimal calendar-based task manager with offline data persistence.
 - Dark theme interface
 - Visual progress indicators on calendar dates
 - Monthly completion tracking
-- Excel file export/import
+- **Auto-save to browser** - Data persists automatically
+- Excel file export/import for backup
 - Task management with completion tracking
 - Responsive design
 - No backend required - runs entirely in browser
@@ -17,8 +18,16 @@ A minimal calendar-based task manager with offline data persistence.
 1. Open `index.html` in a web browser
 2. Click any date to add tasks
 3. Use checkboxes to mark tasks complete
-4. Export data to save as Excel file
-5. Import previously exported files to restore data
+4. **Data saves automatically** - close and reopen anytime
+5. Export to Excel for backup or sharing
+6. Import Excel files to restore data
+
+## Data Persistence
+
+- **Auto-save**: All changes save instantly to browser's localStorage
+- **Persistent**: Data remains even after closing browser
+- **Backup**: Export to Excel file for safety
+- **Restore**: Import Excel file to load data on another device
 
 ## Tech Stack
 
